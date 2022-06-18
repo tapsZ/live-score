@@ -29,10 +29,40 @@ services:
       - postgres
     restart: unless-stopped
 
+  mongo:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - mongo_network
+    volumes:
+      - mongodb:/data/mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=tarenda
+      - MONGO_INITDB_ROOT_PASSWORD=password
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    networks:
+      - mongo_network
+    environment:
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=tarenda
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    depends_on:
+      - mongo
+
 networks:
   postgres:
+    driver: bridge
+  mongo_network:
     driver: bridge
 
 volumes:
   postgres:
   pgadmin:
+  mongodb: {}

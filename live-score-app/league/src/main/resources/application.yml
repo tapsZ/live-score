@@ -1,0 +1,22 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: league
+  data:
+    mongodb:
+      authentication_database: admin
+      username: tarenda
+      password: password
+      database: league
+      port: 27017
+      host: localhost
+      auto-index-creation: true
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
