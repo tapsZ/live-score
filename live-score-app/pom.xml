@@ -6,7 +6,11 @@
 
   <groupId>com.tarenda</groupId>
   <artifactId>live-score-app</artifactId>
+  <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>scoreline</module>
+  </modules>
 
   <name>live-score-app</name>
   <!-- FIXME change it to the project's website -->
