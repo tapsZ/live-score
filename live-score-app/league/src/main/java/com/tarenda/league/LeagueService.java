@@ -1,8 +1,8 @@
 package com.tarenda.league;
 
+import com.tarenda.clients.LeagueRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,5 +17,11 @@ public record LeagueService(LeagueRepository leagueRepository) {
         return LeagueResponse.builder()
                 .league(league.get())
                 .build();
+    }
+
+
+    public void createLeague(LeagueRequest leagueRequest) {
+        League league =  League.builder().build();
+        leagueRepository.insert(league);
     }
 }
