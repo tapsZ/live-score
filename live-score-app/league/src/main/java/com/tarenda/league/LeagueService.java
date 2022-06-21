@@ -19,6 +19,7 @@ public record LeagueService(LeagueRepository leagueRepository) {
                 .build();
     }
 
+
     public void createLeague(LeagueRequest leagueRequest) {
         League league =  League.builder().build();
         leagueRepository.insert(league);

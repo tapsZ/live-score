@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/league")
 public record LeagueController(LeagueService leagueService) {
-
     @GetMapping("/retrieve")
     public LeagueResponse retrieveLeague(){
         return leagueService.retrieveLeague();

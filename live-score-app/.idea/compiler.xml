@@ -16,9 +16,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="score-line" target="17" />
-      <module name="scoreline" target="17" />
-      <module name="source" target="17" />
-      <module name="tournament (1)" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
