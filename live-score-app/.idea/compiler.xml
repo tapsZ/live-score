@@ -2,12 +2,23 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="live-score-app" />
+        <module name="appgw" />
+        <module name="tournament" />
+        <module name="clients" />
+        <module name="eureka-server" />
+        <module name="league" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="score-line" target="17" />
+      <module name="scoreline" target="17" />
+      <module name="source" target="17" />
+      <module name="tournament (1)" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
