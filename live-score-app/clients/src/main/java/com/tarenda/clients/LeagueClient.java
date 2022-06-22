@@ -7,7 +7,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient("league")
 public interface LeagueClient {
     @PostMapping("api/v1/league/create")
-    public void  createLeague(@RequestBody LeagueRequest leagueRequest);
-
-
+    LeagueResponseDTO createLeague(@RequestBody TournamentRequestDTO tournamentRequest);
 }

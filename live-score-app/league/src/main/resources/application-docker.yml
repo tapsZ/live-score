@@ -1,5 +1,8 @@
 server:
   port: 8002
+  error:
+    include-binding-errors: always
+    include-message: always
 spring:
   application:
     name: league
@@ -20,3 +23,6 @@ eureka:
       defaultZone: http://eureka-server:8761/eureka
     fetch-registry: true
     register-with-eureka: true
+logging:
+  level:
+    root: FINE

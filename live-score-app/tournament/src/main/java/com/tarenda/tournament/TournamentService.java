@@ -1,25 +1,36 @@
 package com.tarenda.tournament;
 
 import com.tarenda.clients.LeagueClient;
-import com.tarenda.clients.LeagueRequest;
+import com.tarenda.clients.LeagueResponseDTO;
+import com.tarenda.clients.TournamentRequestDTO;
+import com.tarenda.tournament.scoreline.Scoreline;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
-@AllArgsConstructor
-public class TournamentService {
-    private final TournamentRepository tournamentRepository;
-    private final LeagueClient leagueClient;
-
-    public void recordTournament(TournamentRequest tournamentRequest) {
-        Tournament tournament = Tournament.builder()
-                .createdAt(LocalDate.now())
-//                .scorelines(tournamentRequest.scorelines())
-                .build();
+public record TournamentService(TournamentRepository tournamentRepository, LeagueClient leagueClient) {
+    public LeagueResponseDTO recordTournament(TournamentRequestDTO tournamentRequest) {
+        Tournament tournament = transformToTournament(tournamentRequest);
         tournamentRepository.save(tournament);
-        LeagueRequest leagueRequest = new LeagueRequest();
-        leagueClient.createLeague(leagueRequest);
+       return leagueClient.createLeague(tournamentRequest);
+    }
+
+    private Tournament transformToTournament(TournamentRequestDTO tournamentRequest) {
+        List<Scoreline> scorelineList = new ArrayList<>();
+        tournamentRequest.getScorelines().forEach(s-> scorelineList.add(Scoreline.builder()
+                .matchDate(LocalDate.now())
+                .teamAName(s.getTeamAName())
+                .teamAScore(s.getTeamAScore())
+                .teamBName(s.getTeamBName())
+                .teamBScore(s.getTeamBScore())
+                .build()));
+        return Tournament.builder()
+                .createdAt(LocalDate.now())
+                .scorelines(scorelineList)
+                .build();
     }
 }

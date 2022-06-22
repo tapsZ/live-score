@@ -1,6 +1,6 @@
-package com.tarenda.scoreline;
+package com.tarenda.tournament.scoreline;
 
-public record ScorelineRecordRequest(
+public record ScorelineRequest(
         String teamAName,
         String teamBName,
         Integer teamAScore,

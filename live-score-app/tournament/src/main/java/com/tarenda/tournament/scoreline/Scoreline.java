@@ -1,5 +1,6 @@
-package com.tarenda.scoreline;
+package com.tarenda.tournament.scoreline;
 
+import com.tarenda.tournament.Tournament;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,9 +26,14 @@ public class Scoreline {
             generator = "scoreline_id_sequence"
     )
     private Long id;
+    @Column(nullable = false)
     private String teamAName;
+    @Column(nullable = false)
     private String teamBName;
+    @Column(nullable = false)
     private Integer teamAScore;
+    @Column(nullable = false)
     private Integer teamBScore;
+    @Column(nullable = false)
     private LocalDate matchDate;
 }
