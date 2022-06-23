@@ -47,13 +47,27 @@ public class LeagueBuild {
                 .build();
     }
 
+    public static List<League> getLeagues() {
+        List<League> leagueList = new ArrayList<>();
+        League league1= League.builder()
+                .teams(getTeams())
+                .build();
+
+        League league2= League.builder()
+                .teams(getTeams())
+                .build();
+        leagueList.add(league1);
+        leagueList.add(league2);
+        return leagueList;
+    }
+
     private static Map<String, Integer> getTeams() {
         HashMap<String, Integer> teams= new HashMap<>();
         teams.put("Tarantulas", 6);
         teams.put("Lions", 5);
-        teams.put("Grouches", 0);
         teams.put("FC Awesome", 1);
         teams.put("Snakes", 1);
+        teams.put("Grouches", 0);
         return teams;
     }
 
