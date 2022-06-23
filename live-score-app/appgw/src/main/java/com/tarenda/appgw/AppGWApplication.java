@@ -19,28 +19,8 @@ import java.io.IOException;
 @EnableEurekaClient
 @SpringBootApplication
 @EnableFeignClients(basePackages = "com.tarenda.clients")
-@ComponentScan({"com.tarenda.appgw", "com.tarenda.appgw.formLeague"})
 public class AppGWApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(AppGWApplication.class, args);
-    }
-
-    @Autowired
-    TournamentLeagueService tournamentLeagueService;
-
-    @PostConstruct
-    public void start() throws Exception {
-        System.out.println("****** Generating League Started ******");
-        tournamentLeagueService.formLeague();
-        System.out.println("****** Generating League Finished ******");
-    }
-
-    @Bean
-    CommandLineRunner runner() {
-        return args -> {
-            AppGWApplication main = new AppGWApplication();
-            main.start();
-        };
     }
 }
