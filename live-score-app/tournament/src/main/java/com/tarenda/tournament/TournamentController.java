@@ -15,9 +15,9 @@ import javax.validation.Valid;
 @RequestMapping("api/v1/tournament")
 public record TournamentController(TournamentService tournamentService) {
 
-    @PostMapping("/record")
-    public LeagueResponseDTO recordScoreline(@Valid @RequestBody TournamentRequestDTO tournamentRequest){
+    @PostMapping("/create-league")
+    public LeagueResponseDTO processTournament(@Valid @RequestBody TournamentRequestDTO tournamentRequest){
         log.info("new score line recording{}", tournamentRequest);
-        return tournamentService.recordTournament(tournamentRequest);
+        return tournamentService.saveTournamentAndCreateLeague(tournamentRequest);
     }
 }

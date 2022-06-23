@@ -1,14 +1,11 @@
 package com.tarenda.tournament.scoreline;
 
-import com.tarenda.tournament.Tournament;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Builder
@@ -34,6 +31,8 @@ public class Scoreline {
     private Integer teamAScore;
     @Column(nullable = false)
     private Integer teamBScore;
-    @Column(nullable = false)
-    private LocalDate matchDate;
+    @Setter(AccessLevel.NONE)
+    @Column(insertable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 }

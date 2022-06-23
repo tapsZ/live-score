@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TournamentRequestDTO {
+private String title;
     @NotNull
     List<ScorelineDTO> scorelines;
 }

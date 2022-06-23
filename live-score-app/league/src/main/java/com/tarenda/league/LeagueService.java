@@ -13,31 +13,28 @@ import java.util.stream.Collectors;
 public record LeagueService(LeagueRepository leagueRepository) {
     private static final boolean DESC = false;
 
-    public void saveLeague(League league) {
+    public LeagueResponseDTO createLeague(TournamentRequestDTO tournamentRequest) {
+        LeagueResponseDTO leagueResponseDTO = calculateLeague(tournamentRequest);
+        League league = transformToLeague(leagueResponseDTO.getTeams());
         leagueRepository.insert(league);
+        return leagueResponseDTO;
     }
 
-    public LeagueResponse retrieveLeague() {
-        Optional<League> league = leagueRepository.findTopByOrderByCreatedAtDesc();
-        return league.map(value -> LeagueResponse.builder()
-                .league(value)
+    public LeagueResponseDTO retrieveLeague() {
+        Optional<League> league = leagueRepository.findTopByOrderByIDDesc();
+        return league.map(value -> LeagueResponseDTO.builder()
+                .teams(value.getTeams())
                 .build()).orElse(null);
-    }
-
-    public void createLeague(TournamentRequestDTO tournamentRequest) {
-        LeagueResponseDTO LeagueResponseDTO = calculateLeague(tournamentRequest);
-        League league = transformToLeague(LeagueResponseDTO.getTeams());
-        leagueRepository.insert(league);
     }
 
     private LeagueResponseDTO calculateLeague(TournamentRequestDTO tournamentRequest) {
         HashMap<String, Integer> league = new HashMap<>();
         for (ScorelineDTO scoreline : tournamentRequest.getScorelines()) {
             //Assign Points
-            if (scoreline.getTeamAPoints() > scoreline.getTeamBPoints()) {
+            if (scoreline.getTeamAScore() > scoreline.getTeamBScore()) {
                 scoreline.setTeamAPoints(Points.WIN.point);
                 scoreline.setTeamBPoints(Points.LOSS.point);
-            } else if (scoreline.getTeamAPoints() < scoreline.getTeamBPoints()) {
+            } else if (scoreline.getTeamAScore() < scoreline.getTeamBScore()) {
                 scoreline.setTeamAPoints(Points.LOSS.point);
                 scoreline.setTeamBPoints(Points.WIN.point);
             } else {
@@ -51,6 +48,7 @@ public record LeagueService(LeagueRepository leagueRepository) {
             } else {
                 league.put(scoreline.getTeamAName(), scoreline.getTeamAPoints());
             }
+
             if (league.containsKey(scoreline.getTeamBName())) {
                 league.replace(scoreline.getTeamBName(), league.get(scoreline.getTeamBName()) + scoreline.getTeamBPoints());
             } else {
@@ -65,7 +63,6 @@ public record LeagueService(LeagueRepository leagueRepository) {
     private League transformToLeague(Map<String, Integer> teams) {
         return League.builder()
                 .teams(teams)
-                .createdAt(LocalDateTime.now())
                 .build();
     }
 
