@@ -2,16 +2,17 @@
 An app that generates a league table from a list of score lines 
 
 #Tech Stack
-Postgres
-MongoDB
-SpringBoot (Microservices)
-Docker
-Maven (Project Modules and Build Profiles)
-Jib (Building docker images and pushing to docker hub)
-Eureka Netflix (Service Discovery)
-Sleuth and Zipkin (distributed tracing)
-Spring Cloud Gateway
-JUnit5, AssertJ and Morkito
+- Postgres
+- MongoDB
+- SpringBoot (Microservices)
+- Docker
+- Maven (Project Modules and Build Profiles)
+- Jib (Building docker images and pushing to docker hub)
+- Lombok
+- Eureka Netflix (Service Discovery)
+- Sleuth and Zipkin (distributed tracing)
+- Spring Cloud Gateway
+- JUnit5, AssertJ and Morkito
 
 #How To Start Up
 1. Git Clone 
