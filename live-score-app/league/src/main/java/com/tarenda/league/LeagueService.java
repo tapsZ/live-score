@@ -21,7 +21,7 @@ public record LeagueService(LeagueRepository leagueRepository) {
     }
 
     public LeagueResponseDTO retrieveLeague() {
-        Optional<League> league = leagueRepository.findTopByOrderByIDDesc();
+        Optional<League> league = leagueRepository.findTopByOrderByIdDesc();
         return league.map(value -> LeagueResponseDTO.builder()
                 .teams(value.getTeams())
                 .build()).orElse(null);
