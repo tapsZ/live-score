@@ -1,13 +1,12 @@
 package com.tarenda.tournament;
 
-import com.tarenda.scoreline.Scoreline;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.tarenda.tournament.scoreline.Scoreline;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -15,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//@Table(name = "tournament")
 public class Tournament {
     @Id
     @SequenceGenerator(
@@ -26,8 +24,14 @@ public class Tournament {
             strategy = GenerationType.SEQUENCE,
             generator = "tournament_id_sequence"
     )
-    private Long tournamentId;
-    @OneToMany(targetEntity=Scoreline.class, mappedBy="tournament", fetch=FetchType.EAGER)
+    private Long id;
+    private String title;
+    @OneToMany(targetEntity=Scoreline.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "scoreline_fk", referencedColumnName = "id")
     private List<Scoreline> scorelines;
-    private LocalDate createdAt;
+
+    @Column(name = "CreatedAt", insertable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Setter(AccessLevel.NONE)
+    private Date createdAt;
 }
