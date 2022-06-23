@@ -25,7 +25,7 @@ Please Note that on number 5 replace "c:\temp\demo.txt" with the location of you
 
 #ToDo
 1. Fix the Command Line Spring Context issue
-2. Finish up testing improve coverage and make sure all loopholes are closed
+2. Finish up unit testing improve coverage and work on integration testing
 3. Add security especially on the microservices in the private network ref: live-score\live-score-app\live-score-architecture.drawio.svg
 4. Improve on documentation maybe add swagger
 5. Add CI/CD pipeline
