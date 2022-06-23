@@ -33,17 +33,7 @@ public class LeagueServiceTest {
         //when
         LeagueResponseDTO leagueResponseDTO = underTest.createLeague(tournamentRequest);
         //then
-//        verify(leagueRepository).insert(league);
-//        assertThat(leagueResponseDTO).isEqualTo(LeagueBuild.getLeagueResponseDTO());
-//        try (final AutoCloseableSoftAssertions softly = new AutoCloseableSoftAssertions()) {
-//            softly.assertThat(leagueResponseDTO.getTeams())
-//                    .extracting("Tarantulas").isEqualTo(6)
-//                    .extracting("Lions").isEqualTo(5)
-//                    .extracting("Snakes").isEqualTo(1)
-//                    .extracting("FC Awesome").isEqualTo(1)
-//                    .extracting("Grouches").isEqualTo(0);
-//        }
-
-
+        verify(leagueRepository).insert(league);
+        assertThat(leagueResponseDTO).isEqualTo(LeagueBuild.getLeagueResponseDTO());
     }
 }
