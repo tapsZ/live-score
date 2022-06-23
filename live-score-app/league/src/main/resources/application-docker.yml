@@ -1,0 +1,28 @@
+server:
+  port: 8002
+  error:
+    include-binding-errors: always
+    include-message: always
+spring:
+  application:
+    name: league
+  data:
+    mongodb:
+      authentication_database: admin
+      username: tarenda
+      password: password
+      database: league
+      port: 27017
+      host: mongodb
+      auto-index-creation: true
+  zipkin:
+    base-url: http//zipkin:9411
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+logging:
+  level:
+    root: FINE
